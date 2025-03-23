@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1a3ie1shnh2f"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_sx63u"]
+[ext_resource type="Texture2D" uid="uid://dbx66sovxd1" path="res://icon.svg" id="2_d7b4j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gncd7"]
+
+[node name="Player" type="Node2D"]
+position = Vector2(589, 349)
+script = ExtResource("1_sx63u")
+
+[node name="CharacterController" type="CharacterController" parent="."]
+MovementSpeed = 100.0
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="CharacterController"]
+motion_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterController/CharacterBody2D"]
+shape = SubResource("RectangleShape2D_gncd7")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterController/CharacterBody2D"]
+scale = Vector2(0.168355, 0.147852)
+texture = ExtResource("2_d7b4j")
+
+[connection signal="GetMovementSpeedSignal" from="CharacterController" to="." method="_on_character_controller_get_movement_speed_signal"]

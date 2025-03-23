@@ -15,9 +15,14 @@ void CharacterController::_bind_methods()
     ADD_SIGNAL(MethodInfo("GetMovementSpeedSignal", PropertyInfo(Variant::FLOAT, "data")));
 }
 
-void CharacterController::_process(double delta) 
+void CharacterController::_ready() 
 {
-    movementDirection = Vector2(0.0f, 0.0f);
+    Node* playerBodyNode = get_child(0);
+    playerBody = Object::cast_to<CharacterBody2D>(playerBodyNode);
+}
+
+void CharacterController::_physics_process(double delta) {
+	movementDirection = Vector2(0.0f, 0.0f);
 
     //Input
 
@@ -25,7 +30,7 @@ void CharacterController::_process(double delta)
 
     if(inputSingleton.is_action_pressed("up"))
     {
-        emit_signal("GetMovementSpeedSignal", movementSpeed);
+        //emit_signal("GetMovementSpeedSignal", movementSpeed);
         movementDirection.y -= 1.0f;
     }
     if(inputSingleton.is_action_pressed("down"))
@@ -41,7 +46,8 @@ void CharacterController::_process(double delta)
         movementDirection.x -= 1.0f;
     }
 
-    set_position(get_position() + (movementDirection * movementSpeed * delta));
+    playerBody->move_and_collide(movementDirection * movementSpeed * delta);
+    //set_position(get_position() + (movementDirection * movementSpeed * delta));
 }
 
 void CharacterController::SetMovementSpeed(const double speed) 

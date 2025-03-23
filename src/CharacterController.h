@@ -4,6 +4,7 @@
 #define CHARACTERCONTROLLER_H
 
 #include <godot_cpp/classes/node2d.hpp>
+#include <godot_cpp/classes/character_body2d.hpp>
 
 using namespace godot;
 
@@ -14,6 +15,7 @@ class CharacterController : public Node2D
     private:
         double movementSpeed;
         Vector2 movementDirection;
+        CharacterBody2D* playerBody;
 
     protected:
         static void _bind_methods();
@@ -21,7 +23,9 @@ class CharacterController : public Node2D
     public:
         CharacterController();
         ~CharacterController();
-        void _process(double delta);
+        //void _process(double delta);
+        void _ready();
+        void _physics_process(double delta);
 
         void SetMovementSpeed(const double speed);
         double GetMovementSpeed() const;
