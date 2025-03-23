@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1a3ie1shnh2f"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_54wlm"]
+[ext_resource type="Texture2D" uid="uid://dbx66sovxd1" path="res://icon.svg" id="2_vgkvo"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_54wlm")
+
+[node name="CharacterController" type="CharacterController" parent="."]
+MovementSpeed = 100.0
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterController"]
+texture = ExtResource("2_vgkvo")
+
+[connection signal="GetMovementSpeedSignal" from="CharacterController" to="." method="_on_character_controller_get_movement_speed_signal"]
