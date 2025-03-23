@@ -46,7 +46,13 @@ void CharacterController::_physics_process(double delta) {
         movementDirection.x -= 1.0f;
     }
 
-    playerBody->move_and_collide(movementDirection * movementSpeed * delta);
+    Ref<KinematicCollision2D> hits = playerBody->move_and_collide(movementDirection * movementSpeed * delta);
+    
+    if(hits != nullptr)
+    {
+        UtilityFunctions::print(hits->get_collider());
+    }
+
     //set_position(get_position() + (movementDirection * movementSpeed * delta));
 }
 
