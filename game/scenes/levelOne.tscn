@@ -6,6 +6,7 @@
 size = Vector2(22, 20.9793)
 
 [node name="LevelOne" type="Node2D"]
+rotation = -0.003919
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(-2, 323)
@@ -21,6 +22,7 @@ shape = SubResource("RectangleShape2D_fmkdr")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 position = Vector2(1153, 323)
+rotation = 0.0039063
 scale = Vector2(1, 31.48)
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
@@ -33,7 +35,7 @@ shape = SubResource("RectangleShape2D_fmkdr")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
 position = Vector2(571, -0.999999)
-rotation = 1.57597
+rotation = 1.57253
 scale = Vector2(1, 57.0761)
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D3"]
