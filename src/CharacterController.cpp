@@ -22,7 +22,7 @@ void CharacterController::_ready()
 }
 
 void CharacterController::_physics_process(double delta) {
-	movementDirection = Vector2(0.0f, 0.0f);
+	movementInput = Vector2(0.0f, 0.0f);
 
     //Input
 
@@ -31,24 +31,29 @@ void CharacterController::_physics_process(double delta) {
     if(inputSingleton.is_action_pressed("up"))
     {
         //emit_signal("GetMovementSpeedSignal", movementSpeed);
-        movementDirection.y -= 1.0f;
+        movementInput.y -= 1.0f;
     }
     if(inputSingleton.is_action_pressed("down"))
     {
-        movementDirection.y += 1.0f;
+        movementInput.y += 1.0f;
     }
     if(inputSingleton.is_action_pressed("right"))
     {
-        movementDirection.x += 1.0f;
+        movementInput.x += 1.0f;
     }
     if(inputSingleton.is_action_pressed("left"))
     {
-        movementDirection.x -= 1.0f;
+        movementInput.x -= 1.0f;
     }
 
-    Ref<KinematicCollision2D> hit = playerBody->move_and_collide(movementDirection.normalized() * movementSpeed * delta);
+    mousePosition = get_global_mouse_position();
     
-    playerBody->look_at(get_global_mouse_position());
+    playerBody->look_at(mousePosition);
+
+    UtilityFunctions::print("PlayerPosition: " + playerBody->get_transform().get_origin());
+    UtilityFunctions::print("Look direction: " + (playerBody->get_transform().basis_xform(Vector2(-1, 0))));
+
+    Ref<KinematicCollision2D> hit = playerBody->move_and_collide(movementInput.normalized() * movementSpeed * delta);
 
     if(hit != nullptr)
     {

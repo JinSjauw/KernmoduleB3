@@ -14,8 +14,12 @@ class CharacterController : public Node2D
 
     private:
         double movementSpeed;
-        Vector2 movementDirection;
+        Vector2 movementInput;
+        Vector2 lookDirection;
+        Vector2 mousePosition;
+
         CharacterBody2D* playerBody;
+
 
     protected:
         static void _bind_methods();
