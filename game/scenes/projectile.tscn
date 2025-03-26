@@ -9,16 +9,16 @@ size = Vector2(6.00002, 3)
 ProjectileSpeed = 1000.0
 position = Vector2(336.104, 229.319)
 
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
+[node name="ProjectileBody2D" type="RigidBody2D" parent="."]
 collision_layer = 8
-collision_mask = 7
+collision_mask = 0
 gravity_scale = 0.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProjectileBody2D"]
 position = Vector2(2.896, 0.181)
 shape = SubResource("RectangleShape2D_v10rr")
 
-[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="ProjectileBody2D"]
 position = Vector2(4.925, 0)
 scale = Vector2(0.02, -0.005)
 texture = ExtResource("1_ji50l")

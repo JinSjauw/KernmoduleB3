@@ -1,6 +1,7 @@
 #include "projectile.h"
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/godot.hpp>
+#include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/classes/world2d.hpp>
 #include <godot_cpp/classes/physics_direct_space_state2d.hpp>
 #include <godot_cpp/classes/physics_ray_query_parameters2d.hpp>
@@ -15,7 +16,10 @@ void Projectile::_bind_methods()
 
 Projectile::Projectile() 
 {
-
+    if(Engine::get_singleton()->is_editor_hint())
+    {
+        set_process_mode(Node::ProcessMode::PROCESS_MODE_DISABLED);
+    }
 }
 
 Projectile::~Projectile() 
@@ -34,15 +38,15 @@ void Projectile::_physics_process(double delta)
 {
     //Handle collision
     lastPosition = currentPosition;
-    currentPosition = get_global_position();
+    currentPosition = projectileBody->get_global_position();
 
     PhysicsDirectSpaceState2D* worldState = get_world_2d()->get_direct_space_state();
-    Ref<PhysicsRayQueryParameters2D> rayQuery = PhysicsRayQueryParameters2D::create(lastPosition, currentPosition);
+    Ref<PhysicsRayQueryParameters2D> rayQuery = PhysicsRayQueryParameters2D::create(lastPosition, currentPosition, collisionMask);
     Dictionary result = worldState->intersect_ray(rayQuery);
 
-    if(!result.is_empty())
+    if(result.size() > 0)
     {
-        UtilityFunctions::print("HIT! ", result["collider_id"]);
+        UtilityFunctions::print("HIT! ", result["collider"]);
         queue_free();
     }
 
