@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bjgf6i0iv71qt"]
 
-[ext_resource type="PackedScene" uid="uid://b1a3ie1shnh2f" path="res://scenes/player.tscn" id="1_avlw4"]
-[ext_resource type="PackedScene" uid="uid://dxkdbliw64ji7" path="res://scenes/levelOne.tscn" id="2_dvxqs"]
+[ext_resource type="PackedScene" uid="uid://b1a3ie1shnh2f" path="res://prefabs/player.tscn" id="1_avlw4"]
+[ext_resource type="PackedScene" uid="uid://dxkdbliw64ji7" path="res://prefabs/levelOne.tscn" id="2_dvxqs"]
 
 [node name="Main" type="Node2D"]
 

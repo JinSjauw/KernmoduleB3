@@ -26,7 +26,7 @@ void CharacterController::_ready()
     playerBody = Object::cast_to<CharacterBody2D>(playerBodyNode);
 
     ResourceLoader* resourceLoader = ResourceLoader::get_singleton();
-    projectilePrefabScene = resourceLoader->load("res://scenes/projectile.tscn");
+    projectilePrefabScene = resourceLoader->load("res://prefabs/projectile.tscn");
 
     firingPoint = Object::cast_to<Node2D>(find_child("FiringPoint"));
 }
