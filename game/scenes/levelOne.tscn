@@ -14,6 +14,7 @@ rotation = -0.003919
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(-2, 323)
 scale = Vector2(1, 31.48)
+collision_layer = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
 scale = Vector2(-0.0491934, 0.0410492)
@@ -27,6 +28,7 @@ shape = SubResource("RectangleShape2D_fmkdr")
 position = Vector2(1153, 323)
 rotation = 0.0039063
 scale = Vector2(1, 31.48)
+collision_layer = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
 scale = Vector2(-0.0491934, 0.0410492)
@@ -40,6 +42,7 @@ shape = SubResource("RectangleShape2D_fmkdr")
 position = Vector2(571, -0.999999)
 rotation = 1.57253
 scale = Vector2(1, 57.0761)
+collision_layer = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D3"]
 scale = Vector2(-0.0491934, 0.0410492)
@@ -53,6 +56,7 @@ shape = SubResource("RectangleShape2D_fmkdr")
 position = Vector2(575, 648)
 rotation = 1.57597
 scale = Vector2(1, 57.0761)
+collision_layer = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D4"]
 scale = Vector2(-0.0491934, 0.0410492)
@@ -64,6 +68,8 @@ shape = SubResource("RectangleShape2D_fmkdr")
 
 [node name="Target" type="RigidBody2D" parent="."]
 position = Vector2(932.116, 482.657)
+collision_layer = 4
+gravity_scale = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Target"]
 shape = SubResource("RectangleShape2D_q6mp0")

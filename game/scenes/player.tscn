@@ -13,13 +13,23 @@ script = ExtResource("1_sx63u")
 MovementSpeed = 250.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="CharacterController"]
+collision_mask = 15
 motion_mode = 1
+
+[node name="FiringPoint" type="Node2D" parent="CharacterController/CharacterBody2D"]
+position = Vector2(22, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterController/CharacterBody2D/FiringPoint"]
+position = Vector2(3, 0)
+rotation = -1.5708
+scale = Vector2(0.00944588, 0.00868212)
+texture = ExtResource("2_pkwjv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterController/CharacterBody2D"]
 shape = SubResource("CircleShape2D_j2ii7")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterController/CharacterBody2D"]
-position = Vector2(8, 0)
+position = Vector2(8, 1)
 rotation = -1.5708
 scale = Vector2(0.05, 0.044)
 texture = ExtResource("2_pkwjv")

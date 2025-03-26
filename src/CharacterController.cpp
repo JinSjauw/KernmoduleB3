@@ -20,15 +20,18 @@ void CharacterController::_ready()
 {
     Node* playerBodyNode = get_child(0);
     playerBody = Object::cast_to<CharacterBody2D>(playerBodyNode);
+
     ResourceLoader* resourceLoader = ResourceLoader::get_singleton();
     projectilePrefabScene = resourceLoader->load("res://scenes/projectile.tscn");
+
+    firingPoint = Object::cast_to<Node2D>(find_child("FiringPoint"));
 }
 
-void CharacterController::_physics_process(double delta) {
-	movementInput = Vector2(0.0f, 0.0f);
+void CharacterController::_physics_process(double delta) 
+{
+    movementInput = Vector2(0.0f, 0.0f);
 
     //Input
-
     Input& inputSingleton = *Input::get_singleton();
 
     if(inputSingleton.is_action_pressed("up"))
@@ -48,23 +51,30 @@ void CharacterController::_physics_process(double delta) {
     {
         movementInput.x -= 1.0f;
     }
-
-    if(inputSingleton.is_action_pressed("shoot"))
+    if(inputSingleton.is_action_just_pressed("shoot"))
     {
         //Shoot
         if(projectilePrefabScene->can_instantiate())
         {
-            add_child(projectilePrefabScene->instantiate());
+            if(firingPoint != nullptr)
+            {
+                   Node* instantiatedNode = projectilePrefabScene->instantiate();
+                   add_child(instantiatedNode);
+
+                   Projectile* spawnedProjectile = Object::cast_to<Projectile>(instantiatedNode);
+                   //UtilityFunctions::print("Projectile Spawned!: " + spawnedProjectile->get_position() + " Firing Point position " + firingPoint->get_global_position());
+                   spawnedProjectile->LaunchProjectile(firingPoint->get_global_position(), playerBody->get_transform().basis_xform(Vector2(1, 0)));
+                   UtilityFunctions::print("Look firing point direction: " + (playerBody->get_transform().basis_xform(Vector2(1, 0))));
+            }
         }   
     }
-
 
     mousePosition = get_global_mouse_position();
     
     playerBody->look_at(mousePosition);
 
-    UtilityFunctions::print("PlayerPosition: " + playerBody->get_transform().get_origin());
-    UtilityFunctions::print("Look direction: " + (playerBody->get_transform().basis_xform(Vector2(-1, 0))));
+    //UtilityFunctions::print("PlayerPosition: " + playerBody->get_transform().get_origin());
+    //UtilityFunctions::print("Look direction: " + (playerBody->get_transform().basis_xform(Vector2(-1, 0))));
 
     Ref<KinematicCollision2D> hit = playerBody->move_and_collide(movementInput.normalized() * movementSpeed * delta);
 

@@ -3,17 +3,22 @@
 [ext_resource type="Texture2D" uid="uid://dr7hkuxch716n" path="res://Assets/Black.png" id="1_ji50l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v10rr"]
-size = Vector2(10, 10.0039)
+size = Vector2(6.00002, 3)
 
 [node name="Projectile" type="Projectile"]
+ProjectileSpeed = 1000.0
 position = Vector2(336.104, 229.319)
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
+collision_layer = 8
+collision_mask = 7
+gravity_scale = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-position = Vector2(3.05176e-05, 0.00196838)
+position = Vector2(2.896, 0.181)
 shape = SubResource("RectangleShape2D_v10rr")
 
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
-scale = Vector2(0.02, 0.02)
+position = Vector2(4.925, 0)
+scale = Vector2(0.02, -0.005)
 texture = ExtResource("1_ji50l")

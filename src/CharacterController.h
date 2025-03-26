@@ -21,6 +21,7 @@ class CharacterController : public Node2D
         Vector2 lookDirection;
         Vector2 mousePosition;
 
+        Node2D* firingPoint;
         CharacterBody2D* playerBody;
         Ref<PackedScene> projectilePrefabScene;
 

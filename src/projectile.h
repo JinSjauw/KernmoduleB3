@@ -16,6 +16,8 @@ class Projectile : public Node2D
         double projectileSpeed;
         double projectileDamage;
         
+        uint32_t collisionMask = 0b00000000000000000000000000000111;
+
         Vector2 launchDirection;
         Vector2 lastPosition;
         Vector2 currentPosition;
@@ -32,7 +34,7 @@ class Projectile : public Node2D
         void _ready();
         void _physics_process(double delta);
 
-        void LaunchProjectile(Vector2 launchDirection);
+        void LaunchProjectile(Vector2 launchPosition, Vector2 launchDirection);
         void SetProjectileSpeed(const double damage);
         double GetProjectileSpeed() const;
 };
