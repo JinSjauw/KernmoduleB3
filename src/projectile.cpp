@@ -1,4 +1,5 @@
-#include "projectile.h"
+#include "Projectile.h"
+#include "HealthComponent.h"
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/godot.hpp>
 #include <godot_cpp/classes/engine.hpp>
@@ -12,6 +13,11 @@ void Projectile::_bind_methods()
     ClassDB::bind_method(D_METHOD("SetProjectileSpeed", "ProjectileSpeed"), &Projectile::SetProjectileSpeed);
 
     ClassDB::add_property("Projectile", PropertyInfo(Variant::FLOAT, "ProjectileSpeed"), "SetProjectileSpeed", "GetProjectileSpeed");
+
+    ClassDB::bind_method(D_METHOD("GetProjectileDamage"), &Projectile::GetProjectileDamage);
+    ClassDB::bind_method(D_METHOD("SetProjectileDamage", "ProjectileDamage"), &Projectile::SetProjectileDamage);
+
+    ClassDB::add_property("Projectile", PropertyInfo(Variant::FLOAT, "ProjectileDamage"), "SetProjectileDamage", "GetProjectileDamage");
 }
 
 Projectile::Projectile() 
@@ -47,12 +53,18 @@ void Projectile::_physics_process(double delta)
     if(result.size() > 0)
     {
         UtilityFunctions::print("HIT! ", result["collider"]);
+
+        Node2D* hitObject = Object::cast_to<Node2D>(result["collider"]);
+
+        HealthComponent* target = Object::cast_to<HealthComponent>(hitObject->find_child("HealthComponent"));
+
+        if(target != nullptr)
+        {
+            target->TakeDamage(projectileDamage);
+        }
+
         queue_free();
     }
-
-    //worldState->intersect_ray()
-
-    //send ray cast to last known position and now.
 }
 
 void Projectile::LaunchProjectile(Vector2 launchPosition, Vector2 launchDirection)
@@ -64,11 +76,22 @@ void Projectile::LaunchProjectile(Vector2 launchPosition, Vector2 launchDirectio
     projectileBody->apply_impulse(launchDirection * projectileSpeed, get_global_position());
 }
 
-void Projectile::SetProjectileSpeed(const double speed) {
+void Projectile::SetProjectileSpeed(const double speed) 
+{
 	this->projectileSpeed = speed;
 }
 
 double Projectile::GetProjectileSpeed() const 
 {
 	return projectileSpeed;
+}
+
+void Projectile::SetProjectileDamage(const double damage)
+{
+    this->projectileDamage = damage;
+}
+
+double Projectile::GetProjectileDamage() const
+{
+    return projectileDamage;
 }

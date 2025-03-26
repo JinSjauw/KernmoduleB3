@@ -6,7 +6,9 @@
 
 #include "summator.h"
 #include "CharacterController.h"
-#include "projectile.h"
+#include "Projectile.h"
+#include "HealthComponent.h"
+#include "Enemy.h"
 
 using namespace godot;
 
@@ -18,6 +20,8 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level)
 	GDREGISTER_CLASS(Summator);
 	GDREGISTER_CLASS(CharacterController);
 	GDREGISTER_CLASS(Projectile);
+	GDREGISTER_CLASS(HealthComponent);
+	GDREGISTER_CLASS(Enemy);
 }
 
 void uninitialize_gdextension_types(ModuleInitializationLevel p_level) {

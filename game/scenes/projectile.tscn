@@ -7,6 +7,7 @@ size = Vector2(6.00002, 3)
 
 [node name="Projectile" type="Projectile"]
 ProjectileSpeed = 1000.0
+ProjectileDamage = 50.0
 position = Vector2(336.104, 229.319)
 
 [node name="ProjectileBody2D" type="RigidBody2D" parent="."]

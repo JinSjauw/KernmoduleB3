@@ -28,12 +28,19 @@ texture = ExtResource("2_pkwjv")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterController/CharacterBody2D"]
 shape = SubResource("CircleShape2D_j2ii7")
 
+[node name="HealthComponent" type="HealthComponent" parent="CharacterController/CharacterBody2D/CollisionShape2D"]
+MaxHealth = 100.0
+
 [node name="Sprite2D" type="Sprite2D" parent="CharacterController/CharacterBody2D"]
 position = Vector2(8, 1)
 rotation = -1.5708
 scale = Vector2(0.05, 0.044)
 texture = ExtResource("2_pkwjv")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="CharacterController/CharacterBody2D"]
+physics_interpolation_mode = 1
+zoom = Vector2(2, 2)
+process_callback = 0
+position_smoothing_enabled = true
 
 [connection signal="GetMovementSpeedSignal" from="CharacterController" to="." method="_on_character_controller_get_movement_speed_signal"]

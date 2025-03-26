@@ -35,8 +35,11 @@ class Projectile : public Node2D
         void _physics_process(double delta);
 
         void LaunchProjectile(Vector2 launchPosition, Vector2 launchDirection);
-        void SetProjectileSpeed(const double damage);
+        void SetProjectileSpeed(const double speed);
         double GetProjectileSpeed() const;
+
+        void SetProjectileDamage(const double damage);
+        double GetProjectileDamage() const;
 };
 
 #endif

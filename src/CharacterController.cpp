@@ -66,7 +66,6 @@ void CharacterController::_physics_process(double delta)
                    add_child(instantiatedNode);
 
                    Projectile* spawnedProjectile = Object::cast_to<Projectile>(instantiatedNode);
-                   //UtilityFunctions::print("Projectile Spawned!: " + spawnedProjectile->get_position() + " Firing Point position " + firingPoint->get_global_position());
                    spawnedProjectile->LaunchProjectile(firingPoint->get_global_position(), playerBody->get_transform().basis_xform(Vector2(1, 0)));
                    UtilityFunctions::print("Look firing point direction: " + (playerBody->get_transform().basis_xform(Vector2(1, 0))));
             }
@@ -76,18 +75,6 @@ void CharacterController::_physics_process(double delta)
     mousePosition = get_global_mouse_position();
     
     playerBody->look_at(mousePosition);
-
-    //UtilityFunctions::print("PlayerPosition: " + playerBody->get_transform().get_origin());
-    //UtilityFunctions::print("Look direction: " + (playerBody->get_transform().basis_xform(Vector2(-1, 0))));
-
-    // PhysicsDirectSpaceState2D* worldState = get_world_2d()->get_direct_space_state();
-    // Ref<PhysicsRayQueryParameters2D> rayQuery = PhysicsRayQueryParameters2D::create(firingPoint->get_global_position(), playerBody->get_transform().basis_xform(Vector2(1, 0) * 2));
-    // Dictionary result = worldState->intersect_ray(rayQuery);
-
-    // if(result.size() > 0)
-    // {
-    //     UtilityFunctions::print("Hit!: ", result["collider"]);
-    // }
 
     Ref<KinematicCollision2D> hit = playerBody->move_and_collide(movementInput.normalized() * movementSpeed * delta);
 

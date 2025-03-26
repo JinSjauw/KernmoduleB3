@@ -7,7 +7,7 @@
 #include <godot_cpp/classes/character_body2d.hpp>
 #include <godot_cpp/classes/packed_scene.hpp>
 
-#include "projectile.h"
+#include "Projectile.h"
 
 using namespace godot;
 

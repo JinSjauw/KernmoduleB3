@@ -1,0 +1,36 @@
+#pragma once
+
+#ifndef HEALTHCOMPONENT_H
+#define HEALTHCOMPONENT_H
+
+#include <godot_cpp/classes/node2d.hpp>
+
+using namespace godot;
+
+class HealthComponent : public Node2D
+{
+    GDCLASS(HealthComponent, Node2D);
+
+    private:
+        double maxHealth;
+        double currentHealth;
+
+        Node* rootNode;
+
+        void Die();
+
+    protected:
+        static void _bind_methods();
+    public:
+        HealthComponent();
+        ~HealthComponent();
+
+        void _ready();
+        //void _process(double delta);
+
+        void TakeDamage(double damage);
+        void SetMaxHealth(const double maxHealth);
+        double GetMaxHealth() const;
+};
+
+#endif
