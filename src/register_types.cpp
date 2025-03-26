@@ -6,6 +6,7 @@
 
 #include "summator.h"
 #include "CharacterController.h"
+#include "projectile.h"
 
 using namespace godot;
 
@@ -16,6 +17,7 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level)
 	}
 	GDREGISTER_CLASS(Summator);
 	GDREGISTER_CLASS(CharacterController);
+	GDREGISTER_CLASS(Projectile);
 }
 
 void uninitialize_gdextension_types(ModuleInitializationLevel p_level) {

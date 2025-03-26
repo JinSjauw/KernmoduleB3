@@ -10,9 +10,9 @@ void Projectile::_bind_methods()
     ClassDB::add_property("Projectile", PropertyInfo(Variant::FLOAT, "ProjectileSpeed"), "SetProjectileSpeed", "GetProjectileSpeed");
 }
 
-Projectile::Projectile(Vector2 launchDirection) 
+Projectile::Projectile() 
 {
-    this->launchDirection = launchDirection;
+
 }
 
 Projectile::~Projectile() 
@@ -25,19 +25,22 @@ void Projectile::_ready()
     //Get rigidbody
     Node* projectileBodyNode = get_child(0);
     projectileBody = Object::cast_to<RigidBody2D>(projectileBodyNode);
-
-    //Launch projectile
-    projectileBody->apply_impulse(launchDirection * projectileSpeed);
 }
 
 void Projectile::_physics_process(double delta) 
 {
     //Handle collision
+    //send ray cast to last known position and now.
 }
 
-void Projectile::SetProjectileSpeed(const double speed) 
+void Projectile::LaunchProjectile(Vector2 launchDirection)
 {
-    this->projectileSpeed = speed;
+    this->launchDirection = launchDirection;
+    projectileBody->apply_impulse(launchDirection * projectileSpeed);
+}
+
+void Projectile::SetProjectileSpeed(const double speed) {
+	this->projectileSpeed = speed;
 }
 
 double Projectile::GetProjectileSpeed() const 

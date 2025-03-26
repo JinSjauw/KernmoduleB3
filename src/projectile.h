@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef CHARACTERCONTROLLER_H
-#define CHARACTERCONTROLLER_H
+#ifndef PROJECTILE_H
+#define PROJECTILE_H
 
 #include <godot_cpp/classes/node2d.hpp>
 #include <godot_cpp/classes/rigid_body2d.hpp>
@@ -15,7 +15,10 @@ class Projectile : public Node2D
     private:
         double projectileSpeed;
         double projectileDamage;
+        
         Vector2 launchDirection;
+        Vector2 lastPosition;
+        Vector2 currentPosition;
 
         RigidBody2D* projectileBody;
 
@@ -23,12 +26,13 @@ class Projectile : public Node2D
         static void _bind_methods();
 
     public:
-        Projectile(Vector2 launchDirection);
+        Projectile();
         ~Projectile();
         
         void _ready();
         void _physics_process(double delta);
 
+        void LaunchProjectile(Vector2 launchDirection);
         void SetProjectileSpeed(const double damage);
         double GetProjectileSpeed() const;
 };

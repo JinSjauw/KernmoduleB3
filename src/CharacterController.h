@@ -5,6 +5,9 @@
 
 #include <godot_cpp/classes/node2d.hpp>
 #include <godot_cpp/classes/character_body2d.hpp>
+#include <godot_cpp/classes/packed_scene.hpp>
+
+#include "projectile.h"
 
 using namespace godot;
 
@@ -19,7 +22,7 @@ class CharacterController : public Node2D
         Vector2 mousePosition;
 
         CharacterBody2D* playerBody;
-
+        Ref<PackedScene> projectilePrefabScene;
 
     protected:
         static void _bind_methods();

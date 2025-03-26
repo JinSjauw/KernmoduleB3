@@ -5,6 +5,7 @@
 #include <godot_cpp/godot.hpp>
 #include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/classes/input.hpp>
+#include <godot_cpp/classes/resource_loader.hpp>
 
 void CharacterController::_bind_methods() 
 {
@@ -19,6 +20,8 @@ void CharacterController::_ready()
 {
     Node* playerBodyNode = get_child(0);
     playerBody = Object::cast_to<CharacterBody2D>(playerBodyNode);
+    ResourceLoader* resourceLoader = ResourceLoader::get_singleton();
+    projectilePrefabScene = resourceLoader->load("res://scenes/projectile.tscn");
 }
 
 void CharacterController::_physics_process(double delta) {
@@ -45,6 +48,16 @@ void CharacterController::_physics_process(double delta) {
     {
         movementInput.x -= 1.0f;
     }
+
+    if(inputSingleton.is_action_pressed("shoot"))
+    {
+        //Shoot
+        if(projectilePrefabScene->can_instantiate())
+        {
+            add_child(projectilePrefabScene->instantiate());
+        }   
+    }
+
 
     mousePosition = get_global_mouse_position();
     
