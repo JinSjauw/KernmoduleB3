@@ -19,7 +19,20 @@ Enemy::Enemy() {
 Enemy::~Enemy() {
 }
 
-void Enemy::_ready() 
+void Enemy::Initialize(Node2D* target, Vector2 spawnPosition) 
 {
-    find_child("HealthComponent")->connect("die_signal", Callable(this, "Die"));
+    //Set target
+    this->target = target;
+    set_global_position(spawnPosition);
+
+    UtilityFunctions::print("Spawned!: " + spawnPosition);
+}
+
+void Enemy::_ready() {
+	find_child("HealthComponent")->connect("die_signal", Callable(this, "Die"));
+}
+
+void Enemy::_process(double delta) 
+{
+    //Move & look towards target 
 }

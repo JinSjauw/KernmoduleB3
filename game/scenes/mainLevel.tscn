@@ -5,6 +5,9 @@
 
 [node name="Main" type="Node2D"]
 
+[node name="EnemySpawner" type="EnemySpawner" parent="."]
+SpawnInterval = 2.5
+
 [node name="Player" parent="." instance=ExtResource("1_avlw4")]
 
 [node name="LevelOne" parent="." instance=ExtResource("2_dvxqs")]

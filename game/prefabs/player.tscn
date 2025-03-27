@@ -9,38 +9,38 @@
 position = Vector2(589, 349)
 script = ExtResource("1_sx63u")
 
-[node name="CharacterController" type="CharacterController" parent="."]
+[node name="PlayerController" type="CharacterController" parent="."]
 MovementSpeed = 250.0
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="CharacterController"]
+[node name="PlayerBody" type="CharacterBody2D" parent="PlayerController"]
 collision_mask = 15
 motion_mode = 1
 
-[node name="FiringPoint" type="Node2D" parent="CharacterController/CharacterBody2D"]
+[node name="FiringPoint" type="Node2D" parent="PlayerController/PlayerBody"]
 position = Vector2(22, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterController/CharacterBody2D/FiringPoint"]
+[node name="Sprite2D" type="Sprite2D" parent="PlayerController/PlayerBody/FiringPoint"]
 position = Vector2(3, 0)
 rotation = -1.5708
 scale = Vector2(0.00944588, 0.00868212)
 texture = ExtResource("2_pkwjv")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterController/CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerController/PlayerBody"]
 shape = SubResource("CircleShape2D_j2ii7")
 
-[node name="HealthComponent" type="HealthComponent" parent="CharacterController/CharacterBody2D/CollisionShape2D"]
+[node name="HealthComponent" type="HealthComponent" parent="PlayerController/PlayerBody/CollisionShape2D"]
 MaxHealth = 100.0
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterController/CharacterBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="PlayerController/PlayerBody"]
 position = Vector2(8, 1)
 rotation = -1.5708
 scale = Vector2(0.05, 0.044)
 texture = ExtResource("2_pkwjv")
 
-[node name="Camera2D" type="Camera2D" parent="CharacterController/CharacterBody2D"]
+[node name="PlayerCamera" type="Camera2D" parent="PlayerController/PlayerBody"]
 physics_interpolation_mode = 1
 zoom = Vector2(2, 2)
 process_callback = 0
 position_smoothing_enabled = true
 
-[connection signal="GetMovementSpeedSignal" from="CharacterController" to="." method="_on_character_controller_get_movement_speed_signal"]
+[connection signal="GetMovementSpeedSignal" from="PlayerController" to="." method="_on_character_controller_get_movement_speed_signal"]

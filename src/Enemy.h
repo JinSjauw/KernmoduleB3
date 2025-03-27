@@ -12,6 +12,9 @@ class Enemy : public Node2D
     GDCLASS(Enemy, Node2D);
 
     private:
+
+        Node* target;
+
         void Die();
     protected:
         static void _bind_methods();
@@ -19,7 +22,9 @@ class Enemy : public Node2D
         Enemy();
         ~Enemy();
 
+        void Initialize(Node2D* target, Vector2 spawnPosition);
         void _ready();
+        void _process(double delta);
 };
 
 #endif;
