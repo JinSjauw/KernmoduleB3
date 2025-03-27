@@ -30,7 +30,7 @@ void HealthComponent::_ready()
 void HealthComponent::TakeDamage(int damage) 
 {
     currentHealth -= damage;
-    emit_signal("health_update_signal", currentHealth);
+    emit_signal("health_update_signal", itos(currentHealth));
     UtilityFunctions::print( get_name(), " Taking Damage! ", currentHealth);
     if(currentHealth <= 0)
     {   

@@ -9,7 +9,8 @@
 #include <godot_cpp/classes/resource_loader.hpp>
 #include <godot_cpp/classes/packed_scene.hpp>
 
-
+#include <godot_cpp/classes/file_access.hpp>
+#include <godot_cpp/classes/json.hpp>
 
 void GameManager::_bind_methods() 
 {
@@ -60,7 +61,19 @@ void GameManager::EndGame()
 
     if(sceneTree)
     {
-        sceneTree->change_scene_to_file("res://scenes/mainMenu.tscn");
+        sceneTree->change_scene_to_file("res://scenes/restartScene.tscn");
+    }
+
+    //Write savefile here
+    Dictionary data;
+    data["score"] = score;
+
+    String jsonString = JSON::stringify(data);
+
+    Ref<FileAccess> file = FileAccess::open("res://score_data.json", FileAccess::WRITE);
+    if(file.is_valid())
+    {
+        file->store_string(jsonString);
     }
 }
 
