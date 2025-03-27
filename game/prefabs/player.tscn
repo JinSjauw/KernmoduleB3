@@ -1,11 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b1a3ie1shnh2f"]
+[gd_scene load_steps=5 format=3 uid="uid://dl2phxpxmsljg"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_sx63u"]
 [ext_resource type="Texture2D" uid="uid://dkponk336g1ll" path="res://bitmap.png" id="2_pkwjv"]
+[ext_resource type="AudioStream" uid="uid://cbffjox4v1ea2" path="res://Assets/laser-45816.mp3" id="3_txl5y"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j2ii7"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_da6hv"]
 
 [node name="Player" type="Node2D"]
 position = Vector2(589, 349)
@@ -31,9 +30,11 @@ texture = ExtResource("2_pkwjv")
 shape = SubResource("CircleShape2D_j2ii7")
 
 [node name="HealthComponent" type="HealthComponent" parent="PlayerController/PlayerBody/CollisionShape2D"]
-MaxHealth = 100.0
+MaxHealth = 100
 
 [node name="Sprite2D" type="Sprite2D" parent="PlayerController/PlayerBody"]
+visibility_layer = 7
+z_index = 2
 position = Vector2(8, 1)
 rotation = -1.5708
 scale = Vector2(0.05, 0.044)
@@ -45,41 +46,8 @@ zoom = Vector2(2, 2)
 process_callback = 0
 position_smoothing_enabled = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Control" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ScoreText" type="Label" parent="CanvasLayer/Control"]
-layout_mode = 0
-offset_left = 889.0
-offset_top = 29.0
-offset_right = 996.0
-offset_bottom = 52.0
-text = "Score: 100000
-"
-label_settings = SubResource("LabelSettings_da6hv")
-
-[node name="HealthText" type="Label" parent="CanvasLayer/Control"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -53.0
-offset_top = -53.0
-offset_right = 54.0
-offset_bottom = -30.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "HP: 100
-"
-label_settings = SubResource("LabelSettings_da6hv")
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="PlayerController/PlayerBody"]
+stream = ExtResource("3_txl5y")
 
 [connection signal="GetMovementSpeedSignal" from="PlayerController" to="." method="_on_character_controller_get_movement_speed_signal"]
+[connection signal="health_update_signal" from="PlayerController/PlayerBody/CollisionShape2D/HealthComponent" to="." method="_on_health_component_health_update_signal"]

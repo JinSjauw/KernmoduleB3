@@ -29,7 +29,7 @@ class HealthComponent : public Node2D
 
         void TakeDamage(int damage);
         void SetMaxHealth(const int maxHealth);
-        double GetMaxHealth() const;
+        int GetMaxHealth() const;
 };
 
 #endif

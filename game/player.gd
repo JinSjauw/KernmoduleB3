@@ -16,3 +16,8 @@ func _process(delta: float) -> void:
 func _on_character_controller_get_movement_speed_signal(data: float) -> void:
 	print(data)
 	pass # Replace with function body.
+
+
+func _on_health_component_health_update_signal(currentHealth: int) -> void:
+	print(currentHealth)
+	pass # Replace with function body.

@@ -2,6 +2,10 @@
 
 #include <godot_cpp/classes/node2d.hpp>
 #include <godot_cpp/classes/label.hpp>
+#include <godot_cpp/classes/packed_scene.hpp>
+#include <godot_cpp/classes/audio_stream.hpp>
+#include <godot_cpp/classes/audio_stream_player2d.hpp>
+
 #include "CharacterController.h"
 
 using namespace godot;
@@ -16,8 +20,10 @@ class GameManager : public Node2D
         Node* playerNode;
         Node* enemySpawnerNode;
 
-        int score;
-        int currentHP;
+        Ref<AudioStream> bgm_stream;
+        AudioStreamPlayer2D* bgm_player;
+
+        int score = 0;
 
     protected:
         static void _bind_methods();
@@ -26,6 +32,7 @@ class GameManager : public Node2D
         GameManager();
         ~GameManager();
         void _ready();
-        void UpdateHealth(int health);
+        void EndGame();
+        void UpdateHealth(String value);
         void IncrementScore();
 };

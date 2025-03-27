@@ -29,6 +29,14 @@ void CharacterController::_ready()
     projectilePrefabScene = resourceLoader->load("res://prefabs/projectile.tscn");
 
     firingPoint = Object::cast_to<Node2D>(find_child("FiringPoint"));
+    
+    sfx_player = Object::cast_to<AudioStreamPlayer2D>(find_child("AudioStreamPlayer2D"));
+    sfx_stream = ResourceLoader::get_singleton()->load("res://Assets/laser-45816.mp3");
+
+    if (sfx_stream.is_valid() && sfx_player != nullptr) 
+    {
+        sfx_player->set_stream(sfx_stream);
+    }
 }
 
 void CharacterController::_physics_process(double delta) 
@@ -68,6 +76,8 @@ void CharacterController::_physics_process(double delta)
                    Projectile* spawnedProjectile = Object::cast_to<Projectile>(instantiatedNode);
                    spawnedProjectile->LaunchProjectile(firingPoint->get_global_position(), playerBody->get_transform().basis_xform(Vector2(1, 0)));
                    UtilityFunctions::print("Look firing point direction: " + (playerBody->get_transform().basis_xform(Vector2(1, 0))));
+
+                   sfx_player->play();
             }
         }   
     }

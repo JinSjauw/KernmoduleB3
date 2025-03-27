@@ -11,7 +11,7 @@ void EnemySpawner::_bind_methods()
 
     ClassDB::add_property("EnemySpawner", PropertyInfo(Variant::FLOAT, "SpawnInterval"), "SetSpawnInterval", "GetSpawnInterval");
     
-    ClassDB::bind_method(D_METHOD("EnemyDeath"), &EnemySpawner::EnemyDied);
+    ClassDB::bind_method(D_METHOD("EnemyDied"), &EnemySpawner::EnemyDied);
     ADD_SIGNAL(MethodInfo("enemy_death_signal"));
 }
 
@@ -62,6 +62,7 @@ void EnemySpawner::_process(double delta)
         
         Enemy* spawnedEnemy = Object::cast_to<Enemy>(instantiatedNode);
         spawnedEnemy->Initialize(playerTarget, spawnPosition);
+        spawnedEnemy->find_child("HealthComponent")->connect("die_signal", Callable(this, "EnemyDied"));
     }
 
 }

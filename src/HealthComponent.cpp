@@ -9,7 +9,7 @@ void HealthComponent::_bind_methods()
 
     ClassDB::add_property("HealthComponent", PropertyInfo(Variant::INT, "MaxHealth"), "SetMaxHealth", "GetMaxHealth");
     ADD_SIGNAL(MethodInfo("die_signal"));
-    ADD_SIGNAL(MethodInfo("health_update_signal", PropertyInfo(Variant::INT, "currentHealth")));
+    ADD_SIGNAL(MethodInfo("health_update_signal", PropertyInfo(Variant::STRING, "healthValue")));
 }
 
 HealthComponent::HealthComponent() 
@@ -43,7 +43,7 @@ void HealthComponent::SetMaxHealth(const int maxHealth)
     this->maxHealth = maxHealth;
 }
 
-double HealthComponent::GetMaxHealth() const 
+int HealthComponent::GetMaxHealth() const 
 {
 	return maxHealth;
 }

@@ -50,5 +50,6 @@ void Enemy::_physics_process(double delta)
     {
        Node* target = Object::cast_to<Node>(hit->get_collider())->find_child("HealthComponent");
        Object::cast_to<HealthComponent>(target)->TakeDamage(35);
+       queue_free();
     }
 }
