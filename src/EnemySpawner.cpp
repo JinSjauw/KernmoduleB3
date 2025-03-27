@@ -31,6 +31,11 @@ void EnemySpawner::_ready()
     enemyPrefab = resourceLoader->load("res://prefabs/enemy.tscn");
     playerTarget = Object::cast_to<Node2D>(find_parent("Main")->find_child("PlayerBody"));
     playerCamera = Object::cast_to<Camera2D>(find_parent("Main")->find_child("PlayerCamera"));
+
+    viewPortSize = playerCamera->get_viewport_rect().get_size() / playerCamera->get_zoom();
+    viewPortOffset = viewPortSize * 1.15f / 2;
+
+    rng.instantiate();
 }
 
 void EnemySpawner::_process(double delta) 
@@ -43,7 +48,12 @@ void EnemySpawner::_process(double delta)
         UtilityFunctions::print("Enemy Spawned!");
 
         //Decide spawn position
-        Vector2 spawnPosition = (playerCamera->get_viewport_rect().get_size() / playerCamera->get_zoom()) / 2 + playerTarget->get_global_position();
+        //Randomize it
+
+        Vector2 randomDirection = Vector2(rng->randi_range(1, 2) == 2 ? -1 : 1, rng->randi_range(1, 2) == 2 ? -1 : 1);
+        Vector2 randomOffset = Vector2(rng->randf_range(-100, 100), rng->randf_range(-100, 100));
+        UtilityFunctions::print("RandomPoint: " + randomDirection);
+        Vector2 spawnPosition =  (viewPortOffset * randomDirection + playerTarget->get_global_position()) + randomOffset;
         Node* instantiatedNode = enemyPrefab->instantiate();    
         add_child(instantiatedNode);
         
