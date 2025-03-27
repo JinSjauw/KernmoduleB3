@@ -7,8 +7,9 @@ void HealthComponent::_bind_methods()
     ClassDB::bind_method(D_METHOD("GetMaxHealth"), &HealthComponent::GetMaxHealth);
     ClassDB::bind_method(D_METHOD("SetMaxHealth", "MaxHealth"), &HealthComponent::SetMaxHealth);
 
-    ClassDB::add_property("HealthComponent", PropertyInfo(Variant::FLOAT, "MaxHealth"), "SetMaxHealth", "GetMaxHealth");
+    ClassDB::add_property("HealthComponent", PropertyInfo(Variant::INT, "MaxHealth"), "SetMaxHealth", "GetMaxHealth");
     ADD_SIGNAL(MethodInfo("die_signal"));
+    ADD_SIGNAL(MethodInfo("health_update_signal", PropertyInfo(Variant::INT, "currentHealth")));
 }
 
 HealthComponent::HealthComponent() 
@@ -26,9 +27,10 @@ void HealthComponent::_ready()
     this->currentHealth = this->maxHealth;
 }
 
-void HealthComponent::TakeDamage(double damage) 
+void HealthComponent::TakeDamage(int damage) 
 {
     currentHealth -= damage;
+    emit_signal("health_update_signal", currentHealth);
     UtilityFunctions::print( get_name(), " Taking Damage! ", currentHealth);
     if(currentHealth <= 0)
     {   
@@ -36,7 +38,7 @@ void HealthComponent::TakeDamage(double damage)
     }
 }
 
-void HealthComponent::SetMaxHealth(const double maxHealth) 
+void HealthComponent::SetMaxHealth(const int maxHealth) 
 {
     this->maxHealth = maxHealth;
 }

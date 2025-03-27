@@ -1,9 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://b1a3ie1shnh2f"]
+[gd_scene load_steps=5 format=3 uid="uid://b1a3ie1shnh2f"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_sx63u"]
 [ext_resource type="Texture2D" uid="uid://dkponk336g1ll" path="res://bitmap.png" id="2_pkwjv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j2ii7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_da6hv"]
 
 [node name="Player" type="Node2D"]
 position = Vector2(589, 349)
@@ -42,5 +44,42 @@ physics_interpolation_mode = 1
 zoom = Vector2(2, 2)
 process_callback = 0
 position_smoothing_enabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScoreText" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 889.0
+offset_top = 29.0
+offset_right = 996.0
+offset_bottom = 52.0
+text = "Score: 100000
+"
+label_settings = SubResource("LabelSettings_da6hv")
+
+[node name="HealthText" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -53.0
+offset_top = -53.0
+offset_right = 54.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "HP: 100
+"
+label_settings = SubResource("LabelSettings_da6hv")
 
 [connection signal="GetMovementSpeedSignal" from="PlayerController" to="." method="_on_character_controller_get_movement_speed_signal"]

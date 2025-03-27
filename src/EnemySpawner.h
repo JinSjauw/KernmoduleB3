@@ -34,6 +34,8 @@ class EnemySpawner : public Node2D
         void _ready();
         void _process(double delta);
 
+        void EnemyDied();
+
         void SetSpawnInterval(double interval);
         double GetSpawnInterval();
 };

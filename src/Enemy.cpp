@@ -2,12 +2,6 @@
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/classes/engine.hpp>
 
-void Enemy::Die() 
-{
-    UtilityFunctions::print("Received DIE Signal");
-    queue_free();
-}
-
 void Enemy::_bind_methods() 
 {
     ClassDB::bind_method(D_METHOD("Die"), &Enemy::Die);
@@ -24,16 +18,17 @@ Enemy::Enemy()
 Enemy::~Enemy() {
 }
 
+void Enemy::Die() 
+{
+    UtilityFunctions::print("Received DIE Signal");
+    queue_free();
+}
+
 void Enemy::Initialize(Node2D* target, Vector2 spawnPosition) 
 {
     //Set target
     this->target = target;
     set_global_position(spawnPosition);
-    
-    if(enemyBody != nullptr)
-    {
-        enemyBody->look_at(this->target->get_global_position());
-    }
     
     UtilityFunctions::print("Spawned!: " + spawnPosition);
 }
@@ -47,6 +42,7 @@ void Enemy::_ready() {
 void Enemy::_physics_process(double delta) 
 {
     //Move & look towards target 
+    enemyBody->look_at(this->target->get_global_position());
     Vector2 moveDirection = target->get_global_position() - enemyBody->get_global_position();
     Ref<KinematicCollision2D> hit = enemyBody->move_and_collide(moveDirection.normalized() * 100 * delta);
 

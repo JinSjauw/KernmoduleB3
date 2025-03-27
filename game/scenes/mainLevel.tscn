@@ -8,3 +8,5 @@
 SpawnInterval = 2.5
 
 [node name="Player" parent="." instance=ExtResource("1_avlw4")]
+
+[node name="GameManager" type="GameManager" parent="."]

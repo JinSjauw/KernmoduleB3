@@ -12,8 +12,8 @@ class HealthComponent : public Node2D
     GDCLASS(HealthComponent, Node2D);
 
     private:
-        double maxHealth;
-        double currentHealth;
+        int maxHealth;
+        int currentHealth;
 
         Node* rootNode;
 
@@ -26,10 +26,9 @@ class HealthComponent : public Node2D
         ~HealthComponent();
 
         void _ready();
-        //void _process(double delta);
 
-        void TakeDamage(double damage);
-        void SetMaxHealth(const double maxHealth);
+        void TakeDamage(int damage);
+        void SetMaxHealth(const int maxHealth);
         double GetMaxHealth() const;
 };
 

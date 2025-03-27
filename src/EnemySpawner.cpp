@@ -10,6 +10,9 @@ void EnemySpawner::_bind_methods()
     ClassDB::bind_method(D_METHOD("SetSpawnInterval", "SpawnInterval"), &EnemySpawner::SetSpawnInterval);
 
     ClassDB::add_property("EnemySpawner", PropertyInfo(Variant::FLOAT, "SpawnInterval"), "SetSpawnInterval", "GetSpawnInterval");
+    
+    ClassDB::bind_method(D_METHOD("EnemyDeath"), &EnemySpawner::EnemyDied);
+    ADD_SIGNAL(MethodInfo("enemy_death_signal"));
 }
 
 EnemySpawner::EnemySpawner() 
@@ -61,6 +64,12 @@ void EnemySpawner::_process(double delta)
         spawnedEnemy->Initialize(playerTarget, spawnPosition);
     }
 
+}
+
+void EnemySpawner::EnemyDied() 
+{
+    UtilityFunctions::print("Enemy Died!");
+    emit_signal("enemy_death_signal");
 }
 
 void EnemySpawner::SetSpawnInterval(double interval) 

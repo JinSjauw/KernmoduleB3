@@ -10,6 +10,7 @@
 #include "HealthComponent.h"
 #include "Enemy.h"
 #include "EnemySpawner.h"
+#include "GameManager.h"
 
 using namespace godot;
 
@@ -24,6 +25,7 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level)
 	GDREGISTER_CLASS(HealthComponent);
 	GDREGISTER_CLASS(Enemy);
 	GDREGISTER_CLASS(EnemySpawner);
+	GDREGISTER_CLASS(GameManager);
 }
 
 void uninitialize_gdextension_types(ModuleInitializationLevel p_level) {
