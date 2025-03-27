@@ -52,6 +52,5 @@ void HealthComponent::Die()
 {
     UtilityFunctions::print("Emitting DIE signal!");
     emit_signal("die_signal");
-    //queue_free();
 }
 

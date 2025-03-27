@@ -17,7 +17,6 @@ void CharacterController::_bind_methods()
     ClassDB::bind_method(D_METHOD("SetMovementSpeed", "MovementSpeed"), &CharacterController::SetMovementSpeed);
 
     ClassDB::add_property("CharacterController", PropertyInfo(Variant::FLOAT, "MovementSpeed"), "SetMovementSpeed", "GetMovementSpeed");
-    ADD_SIGNAL(MethodInfo("GetMovementSpeedSignal", PropertyInfo(Variant::FLOAT, "data")));
 }
 
 void CharacterController::_ready() 
@@ -29,7 +28,7 @@ void CharacterController::_ready()
     projectilePrefabScene = resourceLoader->load("res://prefabs/projectile.tscn");
 
     firingPoint = Object::cast_to<Node2D>(find_child("FiringPoint"));
-    
+
     sfx_player = Object::cast_to<AudioStreamPlayer2D>(find_child("AudioStreamPlayer2D"));
     sfx_stream = ResourceLoader::get_singleton()->load("res://Assets/laser-45816.mp3");
 
@@ -48,7 +47,6 @@ void CharacterController::_physics_process(double delta)
 
     if(inputSingleton.is_action_pressed("up"))
     {
-        //emit_signal("GetMovementSpeedSignal", movementSpeed);
         movementInput.y -= 1.0f;
     }
     if(inputSingleton.is_action_pressed("down"))
@@ -86,12 +84,6 @@ void CharacterController::_physics_process(double delta)
     
     playerBody->look_at(mousePosition);
     playerBody->move_and_collide(movementInput.normalized() * movementSpeed * delta);
-    // Ref<KinematicCollision2D> hit = playerBody->move_and_collide(movementInput.normalized() * movementSpeed * delta);
-
-    // if(hit != nullptr)
-    // {
-    //     UtilityFunctions::print(hit->get_collider());
-    // }
 }
 
 void CharacterController::SetMovementSpeed(const double speed) 
