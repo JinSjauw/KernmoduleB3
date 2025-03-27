@@ -37,7 +37,6 @@ class CharacterController : public Node2D
     public:
         CharacterController();
         ~CharacterController();
-        //void _process(double delta);
         void _ready();
         void _physics_process(double delta);
 
